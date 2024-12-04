@@ -1,0 +1,65 @@
+# installs fnm (Fast Node Manager)
+# winget: Esta é a ferramenta de gerenciamento de pacotes do Windows.
+# Schniz.fnm: Este é o identificador do pacote para o FNM (Fast Node.js Version Manager).
+winget install Schniz.fnm
+
+# fnm env --use-on-cd: Esta parte do comando configura o FNM para automaticamente usar a versão correta do Node.js de acordo com o diretório atual.
+# Out-String | Invoke-Expression: Essa parte é específica do PowerShell e é usada para executar o comando anterior e aplicar as configurações.
+# configure fnm environment
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
+# fnm use: Este comando é usado para alternar entre diferentes versões do Node.js.
+# --install-if-missing: Esta flag indica que se a versão especificada não estiver instalada, ela deve ser baixada e instalada.
+# 22: Este é o número da versão do Node.js a ser instalada (neste caso, a versão 22.11.0).
+# download and install Node.js
+fnm use --install-if-missing 22
+
+# node -v: Este comando verifica e imprime a versão atual do Node.js instalada no sistema.
+# verifies the right Node.js version is in the environment
+node -v # should print `v22.11.0`
+
+# npm -v: Este comando verifica e imprime a versão atual do npm (Node Package Manager) instalado no sistema.	
+# verifies the right npm version is in the environment
+npm -v # should print `10.9.0`
+
+Aula 01
+Segunda-feira 02/12/2024
+
+1. Para iniciar o package.json, precisamos de executar o comando:
+npm init -y
+
+Esse arquivo é fundamental para qualquer projeto Node.js, pois armazena diversas informações importantes sobre o seu projeto, como:
+
+.Nome do projeto: O título do seu projeto.
+.Versão: A versão atual do seu projeto.
+.Descrição: Uma breve descrição do que o projeto faz.
+.Autor: O nome do autor ou equipe responsável pelo projeto.
+.Licença: A licença sob a qual o código-fonte do projeto é distribuído.
+.Dependências: Uma lista de todos os pacotes externos que o seu projeto utiliza (bibliotecas, frameworks, etc.).
+.Scripts: Comandos personalizados que podem ser executados usando o npm, como iniciar o servidor, executar testes, etc.
+
+2. Criação do arquivo server.js, que será nosso servidor local, simulando um servidor web:
+server.js
+
+É comumente utilizado como ponto de entrada para a criação de um servidor web.
+
+.Inicia o servidor: É o arquivo onde você escreve o código JavaScript que vai iniciar o servidor Node.js.
+.Define rotas: Dentro desse arquivo, você define as diferentes rotas que o seu servidor irá atender, ou seja, quais URLs ele responderá e com quais dados.
+.Gerencia requisições e respostas: O server.js lida com as requisições HTTP (como GET, POST, PUT, DELETE) que chegam ao servidor e define as respostas que serão enviadas de volta ao cliente.
+.Utiliza frameworks: Muitas vezes, o server.js serve como ponto de entrada para frameworks como Express.js, que facilitam a criação de servidores web em Node.js.
+
+3. O comando abaixo, tem como objetivo importar o módulo HTTP padrão do Node.js para dentro do arquivo JavaScript. Esse módulo fornece as ferramentas necessárias para criar servidores HTTP, que são a base para a construção de aplicações web.
+import http from "http";
+
+4. O comando abaixo, inicia a execução de um arquivo JavaScript chamado 
+node server.js
+
+5. O comando abaixo, executa de forma automática o servidor, após cada alteração/salvamento:
+npm install nodemon@3.0.1
+
+6. package.jason, monitora as alterações nos arquivos do seu projeto e reinicia automaticamente o servidor quando alguma mudança é detectada
+.No pacote package.jason dentro de debug, dentro de debug, dentro de scripts", criamos a seguinte TAG
+    "dev": "nodemon server.js",
+
+7. Após as configurações acima, necessário rodar o comando abaixo par iniciar/reiniciar o servidor
+npm run dev
